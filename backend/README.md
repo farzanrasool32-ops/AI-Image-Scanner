@@ -1,6 +1,6 @@
 # Backend
 
-The Express API is written in TypeScript. Run `npm run dev` for local development, `npm run build` to compile into `dist/`, and `npm start` to run the compiled server. Copy `.env.example` to `.env` and configure `GEMINI_API_KEY`, `MONGODB_URI`, and a random `JWT_SECRET` of at least 32 characters. MongoDB is required for account registration and login; the API still starts without it, but auth endpoints return `503` until it connects.
+The Express API is written in TypeScript. Run `npm run dev` for local development, `npm run build` to compile into `dist/`, and `npm start` to run the compiled server. Copy `.env.example` to `.env` and configure `GEMINI_API_KEY`, `MONGODB_URI`, and a random `JWT_SECRET` of at least 32 characters. The example MongoDB URI is for local development only. In deployment, set `MONGODB_URI` in the backend host's environment to a reachable MongoDB connection string and allow that host's network access in MongoDB. MongoDB is required for account registration and login; auth endpoints return `503` until it connects. Check `/api/health`; `databaseConnected` reports whether the connection is ready.
 
 Authentication is available at `POST /api/auth/signup`, `POST /api/auth/login`, `POST /api/auth/logout`, and `GET /api/auth/me`. Sessions use an HttpOnly cookie; scan, chat, and PDF report endpoints require a signed-in user.
 
