@@ -4,10 +4,10 @@ VisioLab is a React, TypeScript, and Vite image-analysis workspace. The frontend
 
 ## Run locally
 
-1. Install backend dependencies and configure `backend/.env` using `backend/.env.example`. Set `GEMINI_API_KEY` to a Google AI Studio API key, `MONGODB_URI` to your MongoDB connection string, and `JWT_SECRET` to a random secret of at least 32 characters.
-2. Start the API from `backend/` with `npm run dev`. By default it listens on port 3001.
-3. Install frontend dependencies from `frontend/` with `npm install`, then start Vite with `npm run dev`.
-4. Open the Vite URL (usually `http://localhost:5173`). The Vite development server proxies `/api` requests to `http://localhost:3001`.
+1. Install frontend dependencies from `frontend/` with `npm install`, then start Vite with `npm run dev`.
+2. Open the Vite URL (usually `http://localhost:5173`). The Vite development server proxies `/api` requests to `https://ai-image-scanner.vercel.app`.
+
+To run the backend locally instead, configure `backend/.env` using `backend/.env.example`, start the API from `backend/` with `npm run dev`, and set `VITE_API_BASE_URL=https://ai-image-scanner.vercel.app` in `frontend/.env.local`.
 
 For a deployed frontend, set `VITE_API_BASE_URL` to the backend's public base URL and set `FRONTEND_URL` on the backend to the frontend's origin.
 

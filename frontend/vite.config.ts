@@ -7,7 +7,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      "/api": "https://ai-image-scanner.vercel.app/api",
+      "/api": {
+        target: "https://ai-image-scanner.vercel.app",
+        changeOrigin: true,
+      },
     },
   },
 });
