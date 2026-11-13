@@ -1,7 +1,6 @@
 import type { AuthCredentials, User } from "../types/user.types";
+import { apiBase } from "./api";
 import { fetchApi, getApiError } from "./apiErrors";
-
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? "";
 
 function isUser(value: unknown): value is User {
   if (!value || typeof value !== "object") return false;

@@ -4,12 +4,10 @@ VisioLab is a React, TypeScript, and Vite image-analysis workspace. The frontend
 
 ## Run locally
 
-1. Install frontend dependencies from `frontend/` with `npm install`, then start Vite with `npm run dev`.
-2. Open the Vite URL (usually `http://localhost:5173`). The Vite development server proxies `/api` requests to `https://ai-image-scanner.vercel.app`.
+1. Copy `.env.example` to `.env.local` (or use the deployed API default), install frontend dependencies with `npm install`, then start Vite with `npm run dev`.
+2. Open the Vite URL (usually `http://localhost:5173`). API requests use `https://ai-image-scanner.vercel.app` by default.
 
-To run the backend locally instead, configure `backend/.env` using `backend/.env.example`, start the API from `backend/` with `npm run dev`, and set `VITE_API_BASE_URL=https://ai-image-scanner.vercel.app` in `frontend/.env.local`.
-
-For a deployed frontend, set `VITE_API_BASE_URL` to the backend's public base URL and set `FRONTEND_URL` on the backend to the frontend's origin.
+`VITE_API_BASE_URL` defaults to the deployed API URL. Set it in `.env.local` only when connecting to a different API host.
 
 ## Image handling
 

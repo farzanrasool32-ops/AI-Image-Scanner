@@ -1,7 +1,6 @@
 import type { ChatTurn } from "../types/scan.types";
+import { apiBase } from "./api";
 import { fetchApi, getApiError } from "./apiErrors";
-
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? "";
 
 export async function chatAboutImage(
   file: File,

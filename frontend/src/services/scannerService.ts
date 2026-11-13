@@ -1,7 +1,6 @@
 import type { ScanMode, ScanRecord, ScanResult } from "../types/scan.types";
+import { apiBase } from "./api";
 import { fetchApi, getApiError } from "./apiErrors";
-
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? "";
 
 function isScanResult(value: unknown): value is ScanResult {
   if (!value || typeof value !== "object") return false;
