@@ -1,4 +1,3 @@
-
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import express, { type ErrorRequestHandler } from "express";
