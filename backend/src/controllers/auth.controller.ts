@@ -7,7 +7,7 @@ import {
   createAuthToken,
   getAuthSecret,
 } from "../services/authTokens";
-import { isDatabaseReady } from "../services/database";
+import { connectDatabase } from "../services/database";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,8 +20,8 @@ function isDuplicateEmailError(error: unknown) {
   );
 }
 
-function unavailable(response: Parameters<RequestHandler>[1]) {
-  if (!isDatabaseReady()) {
+async function unavailable(response: Parameters<RequestHandler>[1]) {
+  if (!(await connectDatabase())) {
     response.status(503).json({
       error: "Account services are unavailable until MongoDB is connected.",
     });
@@ -64,7 +64,7 @@ function setSessionCookie(
 }
 
 export const signUp: RequestHandler = async (request, response, next) => {
-  if (unavailable(response)) return;
+  if (await unavailable(response)) return;
 
   const body =
     request.body &&
@@ -120,7 +120,7 @@ export const signUp: RequestHandler = async (request, response, next) => {
 };
 
 export const logIn: RequestHandler = async (request, response, next) => {
-  if (unavailable(response)) return;
+  if (await unavailable(response)) return;
 
   const body =
     request.body &&
@@ -164,7 +164,7 @@ export const getCurrentUser: RequestHandler = async (
   response,
   next,
 ) => {
-  if (unavailable(response)) return;
+  if (await unavailable(response)) return;
   try {
     const authenticatedRequest = request as typeof request & {
       user?: { id: string };
