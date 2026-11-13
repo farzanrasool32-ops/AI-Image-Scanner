@@ -1,3 +1,4 @@
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import express, { type ErrorRequestHandler } from "express";
@@ -11,8 +12,17 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(cookieParser());
 app.use(express.json({ limit: "2mb" }));
+
+app.get("/", (_request, response) => {
+  response.json({
+    message: "AI Image Scanner Backend is running!",
+    status: "OK",
+  });
+});
+
 app.use("/api", apiRoutes);
 
 const errorHandler: ErrorRequestHandler = (
