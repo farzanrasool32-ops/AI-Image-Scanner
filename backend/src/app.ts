@@ -4,10 +4,13 @@ import express, { type ErrorRequestHandler } from "express";
 import apiRoutes from "./routes";
 
 const app = express();
+const frontendOrigin = new URL(
+  process.env.FRONTEND_URL || "http://localhost:5173",
+).origin;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: frontendOrigin,
     credentials: true,
   }),
 );
