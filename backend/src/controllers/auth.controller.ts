@@ -22,11 +22,9 @@ function isDuplicateEmailError(error: unknown) {
 
 function unavailable(response: Parameters<RequestHandler>[1]) {
   if (!isDatabaseReady()) {
-    response
-      .status(503)
-      .json({
-        error: "Account services are unavailable until MongoDB is connected.",
-      });
+    response.status(503).json({
+      error: "Account services are unavailable until MongoDB is connected.",
+    });
     return true;
   }
   if (!getAuthSecret()) {
@@ -88,12 +86,10 @@ export const signUp: RequestHandler = async (request, response, next) => {
     return;
   }
   if (password.length < 8 || Buffer.byteLength(password, "utf8") > 72) {
-    response
-      .status(400)
-      .json({
-        error:
-          "Password must be at least 8 characters and no more than 72 bytes.",
-      });
+    response.status(400).json({
+      error:
+        "Password must be at least 8 characters and no more than 72 bytes.",
+    });
     return;
   }
 
@@ -170,7 +166,11 @@ export const getCurrentUser: RequestHandler = async (
 ) => {
   if (unavailable(response)) return;
   try {
-    const user = await UserModel.findById(request.user?.id);
+    const authenticatedRequest = request as typeof request & {
+      user?: { id: string };
+    };
+
+    const user = await UserModel.findById(authenticatedRequest.user?.id);
     if (!user) {
       response.clearCookie(authCookieName, {
         httpOnly: authCookieOptions.httpOnly,

@@ -25,7 +25,11 @@ export const requireAuth: RequestHandler = (request, response, next) => {
         .json({ error: "Your session is invalid. Sign in again." });
       return;
     }
-    request.user = { id: payload.sub };
+    const authenticatedRequest = request as typeof request & {
+      user?: { id: string };
+    };
+
+    authenticatedRequest.user = { id: payload.sub };
     next();
   } catch {
     response
