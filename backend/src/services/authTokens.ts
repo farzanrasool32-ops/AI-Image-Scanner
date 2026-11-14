@@ -1,10 +1,12 @@
 import jwt from 'jsonwebtoken'
 
 export const authCookieName = 'visiolab_session'
+const isProduction = process.env.NODE_ENV === 'production'
+
 export const authCookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'lax' as const,
+  secure: isProduction,
+  sameSite: isProduction ? ('none' as const) : ('lax' as const),
   path: '/api',
   maxAge: 7 * 24 * 60 * 60 * 1000,
 }
