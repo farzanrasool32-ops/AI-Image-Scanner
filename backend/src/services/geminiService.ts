@@ -18,7 +18,7 @@ async function getGemini() {
     apiKey,
     httpOptions: {
       timeout: 45_000,
-      retryOptions: { attempts: 2, initialDelay: 1, maxDelay: 2 },
+      retryOptions: { attempts: 4, initialDelay: 1, maxDelay: 3 },
     },
   });
 }
